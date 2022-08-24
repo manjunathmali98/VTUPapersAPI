@@ -20,7 +20,7 @@ import com.linkit.vtu.service.UserService;
 @RestController
 public class UserController {
 
-	private static final String gitToken = "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";
+	private static final String gitToken = ""; //removed it as Repo is public
 	
 	@Autowired
 	UserService userService;
