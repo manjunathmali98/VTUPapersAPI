@@ -30,10 +30,10 @@ import com.linkit.vtu.service.SchemeService;
 import com.linkit.vtu.service.SemesterService;
 import com.linkit.vtu.service.SubjectService;
 
-@RestController
+@Controller
 public class DummyController {
 	
-	@GetMapping("/home")
+	@GetMapping("/")
 	String homePage(Model model) {
 		return "home";
 	}
