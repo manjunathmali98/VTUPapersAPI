@@ -16,6 +16,8 @@ public interface SubjectService {
 	List<Subject> getBySubjectCode(String subjectCode);
 
 	List<Subject> addSubjectsFromFile(Integer semesterId, Integer branchId, String filename);
+	
+	List<Subject> addSubjects(Integer semesterId, Integer branchId, List<Subject> subjects);
 
 	List<SubjectPaperDTO> findSubjects(String search);
 

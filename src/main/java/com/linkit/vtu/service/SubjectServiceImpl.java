@@ -4,20 +4,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
-
 import com.linkit.vtu.DTO.SubjectPaperDTO;
 import com.linkit.vtu.DTO.SubjectResponseDTO;
 import com.linkit.vtu.entities.Branch;
@@ -49,16 +43,7 @@ public class SubjectServiceImpl implements SubjectService {
 		return subjects;
 	}
 
-//	@Override
-//	public Subject getBySubjectCode(String subjectCode) {
-//		
-//		//System.out.println(subjectCode.getClass().getSimpleName());
-//		//if(subRepo.existsById(subjectCode))
-//			return subRepo.getAllBySubjectCode(subjectCode);
-//		
-//		//return null;
-//		
-//	}
+	
 	
 	@Override
 	public List<Subject> getBySubjectCode(String subjectCode) {
@@ -120,10 +105,13 @@ public class SubjectServiceImpl implements SubjectService {
 			 semester.setSubjects(subjects);
 			 semService.addSemester(semester);
 			 
+			 
+			 br.close();
 		}
 		catch(Exception e) {
 			 e.printStackTrace();
 		}
+		
 		return subjects;
 		}
 
@@ -192,6 +180,29 @@ public class SubjectServiceImpl implements SubjectService {
 		SubjectResponseDTO subResponse = new SubjectResponseDTO(dec, jun);
 		
 		return subResponse;
+	}
+
+
+
+	@Override
+	public List<Subject> addSubjects(Integer semesterId, Integer branchId, List<Subject> subjects) {
+		
+		Branch branch = branchService.getBranchById(branchId);
+		
+		Semester semester = semService.getSem(semesterId);
+		
+		for(Subject s: subjects) {
+			
+			s.setSemester(semester);
+		}
+		
+		semester.setBranch(branch);
+		
+		semester.setSubjects(subjects);
+		
+		semService.addSemester(semester);
+		
+		return subjects;
 	}
 		
 	}

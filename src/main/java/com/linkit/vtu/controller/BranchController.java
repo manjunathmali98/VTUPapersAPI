@@ -46,7 +46,7 @@ public class BranchController {
 	ResponseEntity<HttpStatus> addSemesters(@PathVariable("branchId") Integer branchId){
 		
 		Branch br = branchService.addSemesters(branchId);
-		if(br.getSemesters().size() == 8 )
+		if(br.getSemesters().size() == 6 )
 			return ResponseEntity.ok().body(HttpStatus.ACCEPTED);
 		 
 		return ResponseEntity.ok().body(HttpStatus.BAD_REQUEST);
